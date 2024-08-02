@@ -9,19 +9,21 @@ from scipy import stats
 
 # Configuração da página do Streamlit
 st.set_page_config(
-    page_title="Clusterização de E-commerce",  # Define o título da aba do navegador
-    layout="centered",                # Layout da página (pode ser 'centered' ou 'wide')
-    initial_sidebar_state="expanded"  # Estado inicial da barra lateral (pode ser 'expanded' ou 'collapsed')
+    page_title="Clusterização de E-commerce",
+    layout="centered",
+    initial_sidebar_state="expanded"
 )
 
 # Função para carregar os dados
-@st.cache
+@st.experimental_memo
 def load_data():
     df = pd.read_csv('data.csv', encoding='latin1')
     return df
 
 # Função para pré-processar os dados
 def preprocess_data(df):
+    df = df.copy()  # Trabalhar com uma cópia dos dados
+
     # Remover dados nulos
     df.dropna(subset=['CustomerID', 'Description'], inplace=True)
 
@@ -59,6 +61,7 @@ def preprocess_data(df):
 def apply_clustering(data):
     # Definindo o número de clusters
     kmeans = KMeans(n_clusters=3, random_state=42)
+    data = data.copy()  # Trabalhar com uma cópia dos dados
     data['Cluster'] = kmeans.fit_predict(data[['PurchaseFrequency', 'TotalSpent', 'UniqueProducts']])
 
     # Análise dos clusters
@@ -69,7 +72,6 @@ def apply_clustering(data):
 def plot_clusters(data, cluster_centers):
     st.write("### Visualização dos Clusters")
 
-    # Visualização interativa usando Altair
     scatter_chart = alt.Chart(data).mark_circle(size=60).encode(
         x='PurchaseFrequency',
         y='TotalSpent',
@@ -108,6 +110,7 @@ def pca_visualization(data):
     pca = PCA(n_components=2)
     components = pca.fit_transform(data[['PurchaseFrequency', 'TotalSpent', 'UniqueProducts']])
 
+    data = data.copy()  # Trabalhar com uma cópia dos dados
     data['PCA1'] = components[:, 0]
     data['PCA2'] = components[:, 1]
 
