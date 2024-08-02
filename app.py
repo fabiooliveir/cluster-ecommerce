@@ -156,3 +156,35 @@ plot_clusters(data, cluster_centers)
 # Visualização PCA
 pca_visualization(data)
 
+# Interpretação dos resultados
+st.header("Interpretação dos Resultados")
+st.markdown("""
+### Descrição do Perfil de Compras dos Clientes de Cada Cluster
+
+- **Cluster 0: Clientes Comuns ou Ocasionalmente Ativos**
+  - **Frequência de Compras:** Moderada
+  - **Gasto Total:** Baixo
+  - **Variedade de Produtos:** Moderada
+
+- **Cluster 1: Clientes Valiosos e Regulares**
+  - **Frequência de Compras:** Alta
+  - **Gasto Total:** Alto
+  - **Variedade de Produtos:** Alta
+
+- **Cluster 2: Clientes Focados de Alta Frequência**
+  - **Frequência de Compras:** Muito alta
+  - **Gasto Total:** Médio
+  - **Variedade de Produtos:** Alta
+
+### Justificativa para Segmentação e Personalização das Campanhas de Marketing
+
+A análise dos clusters oferece insights sobre como segmentar e direcionar estratégias de marketing:
+- **Cluster 0:** Ofertas de promoção para aumentar a retenção e frequência de compras.
+- **Cluster 1:** Programas de fidelidade e atendimento personalizado para clientes de alto valor.
+- **Cluster 2:** Recomendações de produtos complementares e pacotes promocionais.
+
+### Sugestões de Ações de Marketing
+- **Cluster 0:** Campanhas de aquisição, ofertas de boas-vindas, e promoções sazonais.
+- **Cluster 1:** Programas de fidelidade, eventos exclusivos, e comunicação personalizada.
+- **Cluster 2:** Ofertas de cross-selling e upselling, testes A/B de ofertas, e incentivos para frequência.
+""")
